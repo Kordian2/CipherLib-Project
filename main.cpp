@@ -2,7 +2,7 @@
 #include "CaesarCipher.hpp"
 
 int main(){
-    CaesarCipher huj;
-    huj.encryption();
-    
+    CaesarCipher test(2,"haslo");
+    test.encryption();
+    test.decryptData();
 }
