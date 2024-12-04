@@ -19,20 +19,37 @@ public:
                 char base = std::islower(c) ? 'a' : 'A';
                 encryptedData += (c - base + m_shift) % 26 + base;
             } else {
-                encryptedData += c;  // Inne znaki pozostają bez zmian
+                encryptedData += c;  
             }
         }
 
         return encryptedData;
     }
+    std::string decryptData(){
+        std::string decryptedData;
+        std::ifstream file("encrypted_data.txt");
+    }
     void saveToFile(const std::string& data, const std::string& filename = "encrypted_data.txt") const {
-        std::ofstream outFile(filename, std::ios::app);  // Otwieramy plik do dopisywania
+        std::ofstream outFile(filename, std::ios::app);  
         if (outFile) {
             outFile << data << std::endl;
-            std::cout << "Dane zapisano do pliku: " << filename << std::endl;
+            std::cout << "The data was saved to a file: " << filename << std::endl;
         } else {
-            std::cerr << "Błąd podczas zapisywania do pliku!" << std::endl;
+            std::cerr << "Error while saving to file!" << std::endl;
         }
+    }
+    void encryption(void) const{
+        std::string password;
+        std::string data;
+        std::cout<<"Enter your password, if you not set it just press enter"<<std::endl;
+        std::getline(std::cin, password);
+        if(m_password == password){
+            std::cout<<"Enter your data to encrypt"<<std::endl;
+            std::getline(std::cin, data);
+            std::string encryptedData = encryptData(data);
+            saveToFile(encryptedData);
+        }
+
     }
     
 };
