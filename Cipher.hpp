@@ -21,7 +21,12 @@ public:
     
     
     void setFileName(std::string name) {
-        m_file = name;
+        if(name != ""){
+           m_file = name; 
+        }else{
+            m_file = "encrypted_data.txt";
+        }
+        
     }
 
 

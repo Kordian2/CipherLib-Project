@@ -6,7 +6,6 @@ private:
     
 public:
     CaesarCipher(int shift = 2,std::string file = "encrypted_data.txt"):m_shift(shift){
-        
         setFileName(file);
     };
     
