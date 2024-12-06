@@ -4,22 +4,15 @@
 
 
 class Cipher{
-private:
-    std::string m_password;
+protected:
+    
     std::string m_file;
 public:
-    void setPassword(std::string password){
-        m_password = password;
-    }
+   
+    virtual void encryptData(const std::string& data) = 0;
     
     
-    std::string getPassword(void) const{
-        return m_password;
-    }
-    virtual std::string encryptData() = 0;
-    
-    
-    virtual std::string decryptData() = 0;
+    virtual void decryptData(const std::string& data) = 0;
     
     
     std::string getFileName(void) const{
@@ -32,7 +25,8 @@ public:
     }
 
 
-    void writeToFile(const std::string& data) const {
+    void writeToFile(const std::string& data)  {
+        
         std::ofstream outFile(getFileName(), std::ios::app);  
         if (outFile) {
             outFile << data << std::endl;
@@ -40,23 +34,25 @@ public:
         } else {
             std::cerr << "Error while saving to file!" << std::endl;
         }
+        
     }
     
     
     std::string readFromFile(void) const {
          std::ifstream file(getFileName());
-    if (!file) {
-        std::cerr << "Can't open the file" << std::endl;
+        if (!file) {
+            std::cerr << "Can't open the file" << std::endl;
         
-    }
+        }
 
-    std::string decryptData;
+        std::string decryptData;
         while (std::getline(file, decryptData)) {
             std::cout << decryptData << std::endl; 
         }
 
+       
         file.close();
-        return 0;
+        return decryptData;
     }
     
 

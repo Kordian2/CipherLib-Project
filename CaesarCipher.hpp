@@ -3,12 +3,14 @@
 class CaesarCipher: public Cipher{
 private:
     int m_shift;
-    std::string m_password;
-    std::string m_file;
-public:
-    CaesarCipher(int shift = 2, std::string password = "", std::string file = "encrypted_data.txt"):m_shift(shift), m_password(password),m_file(file){};
     
-    std::string encryptData(const std::string& data) const {
+public:
+    CaesarCipher(int shift = 2,std::string file = "encrypted_data.txt"):m_shift(shift){
+        
+        setFileName(file);
+    };
+    
+    void encryptData(const std::string& data) override  {
         std::string encryptedData;
 
         for (char c : data) {
@@ -20,11 +22,11 @@ public:
             }
         }
 
-        return encryptedData;
+        writeToFile(encryptedData);
     }
 
 
-    std::string decryptData(const std::string& data) const {
+    void decryptData(const std::string& data) override {
         std::string decryptedData;
 
         for (char c : data) {
@@ -36,12 +38,12 @@ public:
             }
         }
 
-        return decryptedData;
+        readFromFile();
     }
         
     
-    
-    void encryption(void) const{
+   /*
+    void encryption(void) {
         std::string password;
         std::string data;
         std::cout<<"Enter your password, if you not set it just press enter"<<std::endl;
@@ -56,5 +58,12 @@ public:
         }
 
     }
-    
+    std::string decryption(void){
+        std::string password;
+        std::string data;
+        std::cout<<"Enter your password to decrypt your data, if you not set it just press enter"<<std::endl;
+        
+        std::cout<<"Your decrypted data: "<<std::endl;
+    }
+    */
 };
