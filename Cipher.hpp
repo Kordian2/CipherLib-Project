@@ -59,7 +59,19 @@ public:
         file.close();
         return decryptData;
     }
-    
+    std::string getDataFromUser(void){
+        std::string line;
+        std::string data;
+        while(1){
+            std::getline(std::cin, line);
+            if(line.empty()){
+                break;
+            }else{
+                data += line + "\n";
+            }
+        }
+        return data;
+    }
 
 };
 
