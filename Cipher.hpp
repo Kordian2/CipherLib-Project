@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <filesystem>
 
 
 class Cipher{
@@ -21,10 +22,12 @@ public:
     
     
     void setFileName(std::string name) {
-        if(name != ""){
+        name += ".txt";
+        if(name != "" && !std::filesystem::exists(name)){                     
            m_file = name; 
         }else{
-            m_file = "encrypted_data.txt";
+            std::cout<<"File like this is already exist please enter diffrent filename"<<std::endl;
+            std::getline(std::cin, m_file);
         }
         
     }
@@ -32,7 +35,7 @@ public:
 
     void writeToFile(const std::string& data)  {
         
-        std::ofstream outFile(getFileName(), std::ios::app);  
+        std::ofstream outFile(getFileName()+".txt", std::ios::app);  
         if (outFile) {
             outFile << data << std::endl;
             std::cout << "The data was saved to a file: " << getFileName() << std::endl;
