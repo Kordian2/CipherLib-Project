@@ -3,6 +3,7 @@
 #include <fstream>
 #include <filesystem>
 
+#pragma once
 
 class Cipher{
 protected:
@@ -13,7 +14,7 @@ public:
     virtual void encryptData(const std::string& data) = 0;
     
     
-    virtual void decryptData(const std::string& data) = 0;
+    
     
     
     std::string getFileName(void) const{
@@ -22,7 +23,7 @@ public:
     
     
     void setFileName(std::string name) {
-        name += ".txt";
+        
         if(name != "" && !std::filesystem::exists(name)){                     
            m_file = name; 
         }else{
@@ -46,22 +47,7 @@ public:
     }
     
     
-    std::string readFromFile(void) const {
-         std::ifstream file(getFileName());
-        if (!file) {
-            std::cerr << "Can't open the file" << std::endl;
-        
-        }
-
-        std::string decryptData;
-        while (std::getline(file, decryptData)) {
-            std::cout << decryptData << std::endl; 
-        }
-
-       
-        file.close();
-        return decryptData;
-    }
+   
     std::string getDataFromUser(void){
         std::string line;
         std::string data;
@@ -77,4 +63,3 @@ public:
     }
 
 };
-

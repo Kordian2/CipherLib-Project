@@ -1,9 +1,9 @@
 #include <iostream>
 #include "CaesarCipher.hpp"
 #include <limits>
-
+#include "VigenereCipher.hpp"
 std::string CiphersMenu = "CHOOSE A CIPHER YOU WANT TO USE \n"
-"(1. CaesarCipher)";
+"(1. CaesarCipher),(2. VigenereCipher)";
 
 
 
@@ -30,7 +30,7 @@ int main(){
 
             case 1:{
                 int shift {};
-                std::string line {};
+                //std::string line {};
                 std::cout<<"You choose Caesar Cipher"<<std::endl;
                 std::cout<<"Set a shift"<<std::endl;
                 std::cin>>shift;
@@ -38,6 +38,21 @@ int main(){
                 std::cout<<"Choose a filename to save your data"<<std::endl;
                 std::getline(std::cin, file);
                 CaesarCipher x(shift,file);
+                std::cout<<"Enter your data"<<std::endl;
+                data = x.getDataFromUser();
+                x.encryptData(data);
+                break;
+            }
+            case 2:{
+                std::string key {};
+                //std::string line {};
+                std::cout<<"You choose Vigenere Cipher"<<std::endl;
+                std::cout<<"Set a key"<<std::endl;
+                std::cin>>key;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout<<"Choose a filename to save your data"<<std::endl;
+                std::getline(std::cin, file);
+                VigenereCipher x(key,file);
                 std::cout<<"Enter your data"<<std::endl;
                 data = x.getDataFromUser();
                 x.encryptData(data);
