@@ -10,5 +10,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(include)
 
-# Dodaj plik źródłowy
+# Add source file
 add_executable(CipherLib src/main.cpp)
