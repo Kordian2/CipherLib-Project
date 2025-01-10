@@ -1,4 +1,5 @@
 #include "Cipher.hpp"
+namespace kb{
 class VigenereCipher: public Cipher{
 private:
     std::string m_key;
@@ -8,7 +9,7 @@ public:
         setKey(key);
     };
 
-    void encryptData(const std::string& data) override {
+    std::string encryptData(const std::string& data) override {
         std::string encryptedData;
         std::string upperKey = m_key; 
 
@@ -31,9 +32,10 @@ public:
             }
         }
 
-        writeToFile(encryptedData);
+        return encryptedData;
     }
     void setKey(std::string key){
         m_key = key;
     }
 };
+}

@@ -1,4 +1,6 @@
 #include "Cipher.hpp"
+
+namespace kb{
 class CaesarCipher: public Cipher{
 private:
     int m_shift;
@@ -9,7 +11,7 @@ public:
         setShift(shift);
     };
     
-    void encryptData(const std::string& data) override  {
+    std::string encryptData(const std::string& data) override  {
         std::string encryptedData;
 
         for (char c : data) {
@@ -21,14 +23,19 @@ public:
             }
         }
 
-        writeToFile(encryptedData);
+        return encryptedData;
     }
 
 
     
-    void setShift(int shift){
+    void setShift(int shift) {
+    if (shift > 0) {
         m_shift = shift;
-    }   
+    } else {
+        std::cout<< "Shift value must be greater than zero. Keeping the previous value ("<< m_shift << ")." << std::endl;
+    }
+}
     
    
 };
+}

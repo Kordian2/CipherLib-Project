@@ -2,16 +2,16 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
-
+#include <regex>
 #pragma once
-
+namespace kb{
 class Cipher{
 protected:
     
     std::string m_file;
 public:
    
-    virtual void encryptData(const std::string& data) = 0;
+    virtual std::string encryptData(const std::string& data) = 0;
     
     
     
@@ -34,32 +34,38 @@ public:
     }
 
 
-    void writeToFile(const std::string& data)  {
-        
-        std::ofstream outFile(getFileName()+".txt", std::ios::app);  
-        if (outFile) {
-            outFile << data << std::endl;
-            std::cout << "The data was saved to a file: " << getFileName() << std::endl;
-        } else {
-            std::cerr << "Error while saving to file!" << std::endl;
-        }
-        
+    void writeToFile(const std::string& data, const std::string& path = "") {
+    std::string fileName = path.empty() ? getFileName() + ".txt" : path + "/" + getFileName() + ".txt";
+
+    std::ofstream outFile(fileName, std::ios::app);
+    if (outFile) {
+        outFile << data << std::endl;
+        std::cout << "The data was saved to a file: " << fileName << std::endl;
+    } else {
+        std::cerr << "Error while saving to file!" << std::endl;
     }
+}
     
     
    
-    std::string getDataFromUser(void){
-        std::string line;
-        std::string data;
-        while(1){
-            std::getline(std::cin, line);
-            if(line.empty()){
-                break;
-            }else{
-                data += line + "\n";
-            }
+std::string getDataFromUser(void) {
+    std::string line;
+    std::string data;
+    std::regex validStringRegex("^[a-zA-Z ]+$"); 
+    while (true) {
+        std::getline(std::cin, line);
+        if (line.empty()) { 
+            break;
+        } 
+        if (std::regex_match(line, validStringRegex)) {
+            data += line + "\n";
+        } else {
+            std::cout<< "You can only write letters and spaces. Please try again"<<std::endl;
         }
-        return data;
     }
+    
+    return data;
+}
 
 };
+}
