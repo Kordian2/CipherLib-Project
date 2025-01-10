@@ -41,7 +41,7 @@ int main(){
                 std::cout<<"Enter your data"<<std::endl;
                 data = x.getDataFromUser();
                 x.encryptData(data);
-                x.writeToFile(x.encryptData(data),"C:\\Projects\\CipherLib-project\\Data");
+                x.writeToFile(x.encryptData(data),"C:\\Projects\\CipherLib-project");
                 break;
             }
             case 2:{
